@@ -11,7 +11,7 @@
 #include "core/util/include/util.hpp"
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
-TEST(shuravina_o_hoare_simple_merger, test_sort_50) {
+TEST(shuravina_o_hoare_simple_merger_seq, test_sort_50) {
   constexpr size_t kCount = 50;
 
   std::vector<int> in(kCount, 0);
