@@ -25,7 +25,7 @@ std::vector<int> GenerateRandomVector(size_t size, int min_val = -10000, int max
   return vec;
 }
 
-}  // namespace shuravina_o_hoare_simple_merger
+}  // namespace
 
 TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
   constexpr size_t kNumElements = 1000000;
