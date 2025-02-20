@@ -1,7 +1,8 @@
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
 #include <algorithm>
-#include <iostream>
+#include <cstddef>
+#include <vector>
 
 bool shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::PreProcessingImpl() {
   auto* in_ptr = reinterpret_cast<int*>(task_data->inputs[0]);
@@ -28,19 +29,19 @@ bool shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::PostProcessingImpl()
   return true;
 }
 
-void shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::QuickSort(std::vector<int>& arr, int low, int high) {
+void shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::QuickSort(std::vector<int>& arr, size_t low, size_t high) {
   if (low < high) {
-    int pi = Partition(arr, low, high);
-    QuickSort(arr, low, pi - 1);
+    size_t pi = Partition(arr, low, high);
+    if (pi > 0) QuickSort(arr, low, pi - 1);
     QuickSort(arr, pi + 1, high);
   }
 }
 
-int shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::Partition(std::vector<int>& arr, int low, int high) {
+static size_t Partition(std::vector<int>& arr, size_t low, size_t high) {
   int pivot = arr[high];
-  int i = (low - 1);
+  size_t i = (low - 1);
 
-  for (int j = low; j <= high - 1; j++) {
+  for (size_t j = low; j <= high - 1; j++) {
     if (arr[j] < pivot) {
       i++;
       std::swap(arr[i], arr[j]);

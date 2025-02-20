@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <utility>
 #include <vector>
 
@@ -16,8 +17,8 @@ class HoareSortSimpleMerge : public ppc::core::Task {
   bool PostProcessingImpl() override;
 
  private:
-  void QuickSort(std::vector<int>& arr, int low, int high);
-  int Partition(std::vector<int>& arr, int low, int high);
+  void QuickSort(std::vector<int>& arr, size_t low, size_t high);
+  static size_t Partition(std::vector<int>& arr, size_t low, size_t high);
 
   std::vector<int> input_, output_;
 };

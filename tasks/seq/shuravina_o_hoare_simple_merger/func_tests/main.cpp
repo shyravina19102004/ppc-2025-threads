@@ -7,6 +7,7 @@
 #include <random>
 #include <vector>
 
+#include "core/task/include/task.hpp"
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
 namespace {
@@ -24,7 +25,7 @@ std::vector<int> GenerateRandomVector(size_t size, int min_val = -1000, int max_
 
 }  // namespace
 
-TEST(shuravina_o_hoare_simple_merger_seq, AlreadySorted) {
+TEST(shuravina_o_hoare_simple_merger, AlreadySorted) {
   std::vector<int> input = {-5, -3, 0, 2, 3, 10};
   std::vector<int> expected = input;
   std::vector<int> output(input.size(), 0);
