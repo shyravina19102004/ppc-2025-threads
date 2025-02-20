@@ -11,7 +11,7 @@
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
 TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
-  constexpr int kCount = 500;
+  constexpr int kCount = 1000000;
 
   std::vector<int> in(kCount, 0);
   std::vector<int> out(kCount, 0);
@@ -51,7 +51,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
 }
 
 TEST(shuravina_o_hoare_simple_merger_seq, test_task_run) {
-  constexpr int kCount = 500;
+  constexpr int kCount = 1000000;
 
   std::vector<int> in(kCount, 0);
   std::vector<int> out(kCount, 0);

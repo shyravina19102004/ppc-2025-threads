@@ -86,9 +86,15 @@ bool shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::RunImpl() {
   return true;
 }
 
-bool shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::PostProcessingImpl() {
-  for (size_t i = 0; i < output_.size(); i++) {
-    reinterpret_cast<int *>(task_data->outputs[0])[i] = output_[i];
+bool shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::PreProcessingImpl() {
+  unsigned int input_size = 1000000;
+  input_ = std::vector<int>(input_size);
+  for (int i = 0; i < input_size; ++i) {
+    input_[i] = rand() % 1000000;
   }
+
+  unsigned int output_size = input_size;
+  output_ = std::vector<int>(output_size, 0);
+
   return true;
 }
