@@ -17,7 +17,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
   std::vector<int> out(kCount, 0);
 
   for (size_t i = 0; i < kCount; i++) {
-    in[i] = kCount - i;
+    in[i] = static_cast<int>(kCount - i);
   }
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
@@ -45,7 +45,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
 
   std::vector<int> expected(kCount);
   for (size_t i = 0; i < kCount; i++) {
-    expected[i] = i + 1;
+    expected[i] = static_cast<int>(i + 1);
   }
   EXPECT_EQ(out, expected);
 }
@@ -57,7 +57,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_task_run) {
   std::vector<int> out(kCount, 0);
 
   for (size_t i = 0; i < kCount; i++) {
-    in[i] = kCount - i;
+    in[i] = static_cast<int>(kCount - i);
   }
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
@@ -85,7 +85,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_task_run) {
 
   std::vector<int> expected(kCount);
   for (size_t i = 0; i < kCount; i++) {
-    expected[i] = i + 1;
+    expected[i] = static_cast<int>(i + 1);
   }
   EXPECT_EQ(out, expected);
 }

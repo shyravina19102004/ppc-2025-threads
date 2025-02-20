@@ -54,7 +54,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_sort_100_from_file) {
   std::vector<int> out(count, 0);
 
   for (size_t i = 0; i < count; i++) {
-    in[i] = count - i;
+    in[i] = static_cast<int>(count - i);
   }
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
@@ -71,7 +71,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_sort_100_from_file) {
 
   std::vector<int> expected(count);
   for (size_t i = 0; i < count; i++) {
-    expected[i] = i + 1;
+    expected[i] = static_cast<int>(i + 1);
   }
   EXPECT_EQ(out, expected);
 }
