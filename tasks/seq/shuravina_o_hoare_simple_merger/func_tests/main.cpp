@@ -11,14 +11,14 @@
 #include "core/util/include/util.hpp"
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
-TEST(shuravina_o_hoare_simple_merger_seq, test_sort_50) {
+TEST(shuravina_o_hoare_simple_merger, test_sort_50) {
   constexpr size_t kCount = 50;
 
   std::vector<int> in(kCount, 0);
   std::vector<int> out(kCount, 0);
 
   for (size_t i = 0; i < kCount; i++) {
-    in[i] = kCount - i;
+    in[i] = static_cast<int>(kCount - i);
   }
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
@@ -35,7 +35,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_sort_50) {
 
   std::vector<int> expected(kCount);
   for (size_t i = 0; i < kCount; i++) {
-    expected[i] = i + 1;
+    expected[i] = static_cast<int>(i + 1);
   }
   EXPECT_EQ(out, expected);
 }

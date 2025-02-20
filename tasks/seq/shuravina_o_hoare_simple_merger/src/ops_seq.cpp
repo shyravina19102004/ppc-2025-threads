@@ -42,12 +42,20 @@ void shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::Merge(std::vector<in
   int n1 = mid - low + 1;
   int n2 = high - mid;
 
-  std::vector<int> left(n1), right(n2);
+  std::vector<int> left(n1);
+  std::vector<int> right(n2);
 
-  for (int i = 0; i < n1; i++) left[i] = arr[low + i];
-  for (int i = 0; i < n2; i++) right[i] = arr[mid + 1 + i];
+  for (int i = 0; i < n1; i++) {
+    left[i] = arr[low + i];
+  }
+  for (int i = 0; i < n2; i++) {
+    right[i] = arr[mid + 1 + i];
+  }
 
-  int i = 0, j = 0, k = low;
+  int i = 0;
+  int j = 0;
+  int k = low;
+
   while (i < n1 && j < n2) {
     if (left[i] <= right[j]) {
       arr[k] = left[i];
@@ -73,7 +81,7 @@ void shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::Merge(std::vector<in
 }
 
 bool shuravina_o_hoare_simple_merger::HoareSortSimpleMerge::RunImpl() {
-  QuickSort(input_, 0, input_.size() - 1);
+  QuickSort(input_, 0, static_cast<int>(input_.size() - 1));
   output_ = input_;
   return true;
 }
