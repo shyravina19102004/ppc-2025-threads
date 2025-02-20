@@ -16,9 +16,10 @@ class HoareSortSimpleMerge : public ppc::core::Task {
   bool PostProcessingImpl() override;
 
  private:
-  std::vector<int> input_, output_;
   void QuickSort(std::vector<int>& arr, int low, int high);
-  static void Merge(std::vector<int>& arr, int low, int mid, int high);
+  int Partition(std::vector<int>& arr, int low, int high);
+
+  std::vector<int> input_, output_;
 };
 
 }  // namespace shuravina_o_hoare_simple_merger
