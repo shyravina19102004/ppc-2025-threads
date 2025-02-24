@@ -60,15 +60,11 @@ bool TestTaskSequential::PreProcessingImpl() {
   return true;
 }
 
-bool TestTaskSequential::ValidationImpl() {
-  return task_data->inputs_count[0] == task_data->outputs_count[0];
-}
+bool TestTaskSequential::ValidationImpl() { return task_data->inputs_count[0] == task_data->outputs_count[0]; }
 
 bool TestTaskSequential::RunImpl() {
   QuickSort(input_, 0, input_.size() - 1);
-
   Merge(input_, 0, input_.size() / 2 - 1, input_.size() - 1);
-
   output_ = input_;
   return true;
 }
