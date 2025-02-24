@@ -65,9 +65,7 @@ bool TestTaskSequential::PreProcessingImpl() {
   return true;
 }
 
-bool TestTaskSequential::ValidationImpl() {
-  return task_data->inputs_count[0] == task_data->outputs_count[0];
-}
+bool TestTaskSequential::ValidationImpl() { return task_data->inputs_count[0] == task_data->outputs_count[0]; }
 
 bool TestTaskSequential::RunImpl() {
   size_t size = input_.size();
