@@ -1,6 +1,7 @@
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
 #include <algorithm>
+#include <cstddef>
 #include <vector>
 
 namespace shuravina_o_hoare_simple_merger {
