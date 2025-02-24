@@ -9,7 +9,7 @@
 #include "core/task/include/task.hpp"
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
-TEST(shuravina_o_hoare_simple_merger, test_pipeline_run) {
+TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
   constexpr int kCount = 500;
 
   std::vector<int> in(kCount, 0);
@@ -43,7 +43,7 @@ TEST(shuravina_o_hoare_simple_merger, test_pipeline_run) {
   ppc::core::Perf::PrintPerfStatistic(perf_results);
 }
 
-TEST(shuravina_o_hoare_simple_merger, test_task_run) {
+TEST(shuravina_o_hoare_simple_merger_seq, test_task_run) {
   constexpr int kCount = 500;
 
   std::vector<int> in(kCount, 0);
