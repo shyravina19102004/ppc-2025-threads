@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+#include <cstdint>
 #include <utility>
 #include <vector>
 
@@ -9,16 +11,19 @@ namespace shuravina_o_hoare_simple_merger {
 
 class TestTaskSequential : public ppc::core::Task {
  public:
-  explicit TestTaskSequential(ppc::core::TaskDataPtr task_data) : Task(std::move(task_data)) {}
+  explicit TestTaskSequential(std::shared_ptr<ppc::core::TaskData> taskData) : Task(std::move(taskData)) {}
+
   bool PreProcessingImpl() override;
   bool ValidationImpl() override;
   bool RunImpl() override;
   bool PostProcessingImpl() override;
 
  private:
-  std::vector<int> input_, output_;
+  std::vector<int> input_;
+  std::vector<int> output_;
+
   void QuickSort(std::vector<int>& arr, int low, int high);
-  void Merge(std::vector<int>& arr, int low, int mid, int high);
+  static void Merge(std::vector<int>& arr, int low, int mid, int high);
 };
 
 }  // namespace shuravina_o_hoare_simple_merger
