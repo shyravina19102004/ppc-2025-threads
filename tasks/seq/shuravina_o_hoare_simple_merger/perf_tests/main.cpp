@@ -10,7 +10,7 @@
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
 TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
-  constexpr int kCount = 500;
+  constexpr int kCount = 100000;
 
   std::vector<int> in(kCount, 0);
   std::vector<int> out(kCount, 0);
@@ -28,7 +28,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
   auto test_task_sequential = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskSequential>(task_data_seq);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
-  perf_attr->num_running = 10;
+  perf_attr->num_running = 100;
   const auto t0 = std::chrono::high_resolution_clock::now();
   perf_attr->current_timer = [&] {
     auto current_time_point = std::chrono::high_resolution_clock::now();
@@ -41,10 +41,16 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_pipeline_run) {
   auto perf_analyzer = std::make_shared<ppc::core::Perf>(test_task_sequential);
   perf_analyzer->PipelineRun(perf_attr, perf_results);
   ppc::core::Perf::PrintPerfStatistic(perf_results);
+
+  std::vector<int> expected(kCount);
+  for (int i = 0; i < kCount; i++) {
+    expected[i] = i + 1;
+  }
+  EXPECT_EQ(out, expected);
 }
 
 TEST(shuravina_o_hoare_simple_merger_seq, test_task_run) {
-  constexpr int kCount = 500;
+  constexpr int kCount = 100000;
 
   std::vector<int> in(kCount, 0);
   std::vector<int> out(kCount, 0);
@@ -62,7 +68,7 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_task_run) {
   auto test_task_sequential = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskSequential>(task_data_seq);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
-  perf_attr->num_running = 10;
+  perf_attr->num_running = 100;
   const auto t0 = std::chrono::high_resolution_clock::now();
   perf_attr->current_timer = [&] {
     auto current_time_point = std::chrono::high_resolution_clock::now();
@@ -75,4 +81,10 @@ TEST(shuravina_o_hoare_simple_merger_seq, test_task_run) {
   auto perf_analyzer = std::make_shared<ppc::core::Perf>(test_task_sequential);
   perf_analyzer->TaskRun(perf_attr, perf_results);
   ppc::core::Perf::PrintPerfStatistic(perf_results);
+
+  std::vector<int> expected(kCount);
+  for (int i = 0; i < kCount; i++) {
+    expected[i] = i + 1;
+  }
+  EXPECT_EQ(out, expected);
 }
