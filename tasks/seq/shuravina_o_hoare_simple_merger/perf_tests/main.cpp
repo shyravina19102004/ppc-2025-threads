@@ -16,14 +16,14 @@ TEST(shuravina_o_hoare_simple_merger, test_pipeline_run) {
   std::vector<int> in(kCount, 0);
   std::vector<int> out(kCount, 0);
 
-  for (size_t i = 0; i < kCount; i++) {
+  for (int i = 0; i < kCount; i++) {
     in[i] = kCount - i;
   }
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
-  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
   task_data_seq->inputs_count.emplace_back(in.size());
-  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
   task_data_seq->outputs_count.emplace_back(out.size());
 
   auto test_task_sequential = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskSequential>(task_data_seq);
@@ -50,14 +50,14 @@ TEST(shuravina_o_hoare_simple_merger, test_task_run) {
   std::vector<int> in(kCount, 0);
   std::vector<int> out(kCount, 0);
 
-  for (size_t i = 0; i < kCount; i++) {
+  for (int i = 0; i < kCount; i++) {
     in[i] = kCount - i;
   }
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
-  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t *>(in.data()));
+  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
   task_data_seq->inputs_count.emplace_back(in.size());
-  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t *>(out.data()));
+  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
   task_data_seq->outputs_count.emplace_back(out.size());
 
   auto test_task_sequential = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskSequential>(task_data_seq);
