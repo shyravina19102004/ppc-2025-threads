@@ -9,7 +9,8 @@
 #include "core/task/include/task.hpp"
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
-static std::vector<int> GenerateRandomArray(size_t size, int min_val, int max_val) {
+namespace {
+std::vector<int> GenerateRandomArray(size_t size, int min_val, int max_val) {
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<> distrib(min_val, max_val);
@@ -20,6 +21,7 @@ static std::vector<int> GenerateRandomArray(size_t size, int min_val, int max_va
   }
   return arr;
 }
+}  // namespace
 
 TEST(shuravina_o_hoare_simple_merger, test_random_array) {
   const size_t array_size = 1000;
