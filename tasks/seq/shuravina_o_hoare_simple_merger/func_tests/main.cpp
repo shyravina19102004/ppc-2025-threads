@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <random>
@@ -8,7 +9,7 @@
 #include "core/task/include/task.hpp"
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
-std::vector<int> generate_random_array(size_t size, int min_val, int max_val) {
+static std::vector<int> GenerateRandomArray(size_t size, int min_val, int max_val) {
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<> distrib(min_val, max_val);
@@ -25,7 +26,7 @@ TEST(shuravina_o_hoare_simple_merger, test_random_array) {
   const int min_val = -1000;
   const int max_val = 1000;
 
-  std::vector<int> in = generate_random_array(array_size, min_val, max_val);
+  std::vector<int> in = GenerateRandomArray(array_size, min_val, max_val);
   std::vector<int> out(in.size(), 0);
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
@@ -50,7 +51,7 @@ TEST(shuravina_o_hoare_simple_merger, test_large_random_array) {
   const int min_val = -10000;
   const int max_val = 10000;
 
-  std::vector<int> in = generate_random_array(array_size, min_val, max_val);
+  std::vector<int> in = GenerateRandomArray(array_size, min_val, max_val);
   std::vector<int> out(in.size(), 0);
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
