@@ -12,18 +12,28 @@
 namespace {
 
 bool IsPrime(size_t n) {
-  if (n <= 1) return false;
-  if (n <= 3) return true;
-  if (n % 2 == 0 || n % 3 == 0) return false;
+  if (n <= 1) {
+    return false;
+  }
+  if (n <= 3) {
+    return true;
+  }
+  if (n % 2 == 0 || n % 3 == 0) {
+    return false;
+  }
   for (size_t i = 5; i * i <= n; i += 6) {
-    if (n % i == 0 || n % (i + 2) == 0) return false;
+    if (n % i == 0 || n % (i + 2) == 0) {
+      return false;
+    }
   }
   return true;
 }
 
 bool IsReverseSorted(const std::vector<int>& arr) {
   for (size_t i = 1; i < arr.size(); ++i) {
-    if (arr[i - 1] < arr[i]) return false;
+    if (arr[i - 1] < arr[i]) {
+      return false;
+    }
   }
   return true;
 }
