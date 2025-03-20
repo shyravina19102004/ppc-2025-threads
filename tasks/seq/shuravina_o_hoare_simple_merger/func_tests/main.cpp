@@ -10,6 +10,24 @@
 #include "seq/shuravina_o_hoare_simple_merger/include/ops_seq.hpp"
 
 namespace {
+
+bool IsPrime(size_t n) {
+  if (n <= 1) return false;
+  if (n <= 3) return true;
+  if (n % 2 == 0 || n % 3 == 0) return false;
+  for (size_t i = 5; i * i <= n; i += 6) {
+    if (n % i == 0 || n % (i + 2) == 0) return false;
+  }
+  return true;
+}
+
+bool IsReverseSorted(const std::vector<int>& arr) {
+  for (size_t i = 1; i < arr.size(); ++i) {
+    if (arr[i - 1] < arr[i]) return false;
+  }
+  return true;
+}
+
 std::vector<int> GenerateRandomArray(size_t size, int min_val, int max_val) {
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -21,6 +39,7 @@ std::vector<int> GenerateRandomArray(size_t size, int min_val, int max_val) {
   }
   return arr;
 }
+
 }  // namespace
 
 TEST(shuravina_o_hoare_simple_merger, test_random_array) {
@@ -30,6 +49,8 @@ TEST(shuravina_o_hoare_simple_merger, test_random_array) {
 
   std::vector<int> in = GenerateRandomArray(array_size, min_val, max_val);
   std::vector<int> out(in.size(), 0);
+
+  ASSERT_FALSE(IsReverseSorted(in));
 
   auto task_data_seq = std::make_shared<ppc::core::TaskData>();
   task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
@@ -52,6 +73,8 @@ TEST(shuravina_o_hoare_simple_merger, test_large_random_array) {
   const size_t array_size = 10000;
   const int min_val = -10000;
   const int max_val = 10000;
+
+  ASSERT_TRUE(IsPrime(array_size));
 
   std::vector<int> in = GenerateRandomArray(array_size, min_val, max_val);
   std::vector<int> out(in.size(), 0);
