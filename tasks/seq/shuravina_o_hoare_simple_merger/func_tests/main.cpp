@@ -80,7 +80,7 @@ TEST(shuravina_o_hoare_simple_merger, test_random_array) {
 }
 
 TEST(shuravina_o_hoare_simple_merger, test_large_random_array) {
-  const size_t array_size = 10000;
+  const size_t array_size = 10007;
   const int min_val = -10000;
   const int max_val = 10000;
 
