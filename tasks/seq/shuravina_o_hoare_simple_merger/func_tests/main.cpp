@@ -30,6 +30,9 @@ bool IsPrime(size_t n) {
 }
 
 bool IsReverseSorted(const std::vector<int>& arr) {
+  if (arr.empty()) {
+    return true;
+  }
   for (size_t i = 1; i < arr.size(); ++i) {
     if (arr[i - 1] < arr[i]) {
       return false;
