@@ -73,7 +73,7 @@ void TestTaskALL::Merge(std::vector<int>& arr, int low, int mid, int high) {
 }
 
 bool TestTaskALL::PreProcessingImpl() {
-  int rank;
+  int rank = 0;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (rank == 0) {
@@ -97,7 +97,7 @@ bool TestTaskALL::PreProcessingImpl() {
 }
 
 bool TestTaskALL::ValidationImpl() {
-  int rank;
+  int rank = 0;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (rank == 0) {
@@ -122,7 +122,8 @@ bool TestTaskALL::ValidationImpl() {
 }
 
 bool TestTaskALL::RunImpl() {
-  int rank, size;
+  int rank = 0;
+  int size = 1;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
 
@@ -141,7 +142,7 @@ bool TestTaskALL::RunImpl() {
 }
 
 bool TestTaskALL::PostProcessingImpl() {
-  int rank;
+  int rank = 0;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (rank == 0) {
