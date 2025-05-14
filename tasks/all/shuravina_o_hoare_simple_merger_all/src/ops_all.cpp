@@ -11,17 +11,6 @@ namespace shuravina_o_hoare_simple_merger {
 
 void TestTaskALL::QuickSort(std::vector<int>& arr, int low, int high) {
   if (low < high) {
-    bool is_sorted = true;
-    for (int i = low + 1; i <= high; ++i) {
-      if (arr[i - 1] > arr[i]) {
-        is_sorted = false;
-        break;
-      }
-    }
-    if (is_sorted) {
-      return;
-    }
-
     int pivot = arr[high];
     int i = low - 1;
 
@@ -47,28 +36,67 @@ void TestTaskALL::QuickSort(std::vector<int>& arr, int low, int high) {
 
 void TestTaskALL::Merge(std::vector<int>& arr, int low, int mid, int high) {
   std::vector<int> temp(high - low + 1);
-  int i = low;
-  int j = mid + 1;
-  int k = 0;
+  int i = low, j = mid + 1, k = 0;
 
   while (i <= mid && j <= high) {
-    if (arr[i] <= arr[j]) {
-      temp[k++] = arr[i++];
-    } else {
-      temp[k++] = arr[j++];
+    temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
+  }
+  while (i <= mid) temp[k++] = arr[i++];
+  while (j <= high) temp[k++] = arr[j++];
+  for (i = low, k = 0; i <= high; ++i, ++k) arr[i] = temp[k];
+}
+
+void TestTaskALL::ParallelQuickSort(std::vector<int>& arr) {
+  if (!arr.empty()) {
+    QuickSort(arr, 0, static_cast<int>(arr.size()) - 1);
+  }
+}
+
+void TestTaskALL::DistributeData() {
+  int rank, size;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+  if (rank == 0) {
+    size_t chunk_size = input_.size() / size;
+    for (int i = 1; i < size; ++i) {
+      size_t start = i * chunk_size;
+      size_t end = (i == size - 1) ? input_.size() : (i + 1) * chunk_size;
+      size_t count = end - start;
+      MPI_Send(&count, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD);
+      MPI_Send(input_.data() + start, count, MPI_INT, i, 0, MPI_COMM_WORLD);
     }
+    local_data_ = std::vector<int>(input_.begin(), input_.begin() + chunk_size);
+  } else {
+    size_t count;
+    MPI_Recv(&count, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    local_data_.resize(count);
+    MPI_Recv(local_data_.data(), count, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
   }
+}
 
-  while (i <= mid) {
-    temp[k++] = arr[i++];
-  }
+void TestTaskALL::GatherAndMergeResults() {
+  int rank, size;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-  while (j <= high) {
-    temp[k++] = arr[j++];
-  }
+  if (rank == 0) {
+    output_ = local_data_;
+    std::vector<int> temp;
+    for (int i = 1; i < size; ++i) {
+      size_t count;
+      MPI_Recv(&count, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      temp.resize(count);
+      MPI_Recv(temp.data(), count, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-  for (i = low, k = 0; i <= high; ++i, ++k) {
-    arr[i] = temp[k];
+      std::vector<int> merged(output_.size() + temp.size());
+      std::merge(output_.begin(), output_.end(), temp.begin(), temp.end(), merged.begin());
+      output_ = std::move(merged);
+    }
+  } else {
+    size_t count = local_data_.size();
+    MPI_Send(&count, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
+    MPI_Send(local_data_.data(), count, MPI_INT, 0, 0, MPI_COMM_WORLD);
   }
 }
 
@@ -80,19 +108,9 @@ bool TestTaskALL::PreProcessingImpl() {
     if (task_data->inputs.empty() || task_data->inputs[0] == nullptr) {
       return false;
     }
-
     auto* in_ptr = reinterpret_cast<int*>(task_data->inputs[0]);
-    auto input_size = static_cast<size_t>(task_data->inputs_count[0]);
-    input_ = std::vector<int>(in_ptr, in_ptr + input_size);
-
-    if (task_data->outputs.empty() || task_data->outputs[0] == nullptr) {
-      return false;
-    }
-
-    auto output_size = static_cast<size_t>(task_data->outputs_count[0]);
-    output_ = std::vector<int>(output_size, 0);
+    input_ = std::vector<int>(in_ptr, in_ptr + task_data->inputs_count[0]);
   }
-
   return true;
 }
 
@@ -101,43 +119,19 @@ bool TestTaskALL::ValidationImpl() {
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (rank == 0) {
-    if (task_data->inputs.empty() || task_data->outputs.empty()) {
-      return false;
-    }
-
-    if (task_data->inputs[0] == nullptr || task_data->outputs[0] == nullptr) {
-      return false;
-    }
-
-    if (task_data->inputs_count.empty() || task_data->outputs_count.empty()) {
-      return false;
-    }
-
-    if (task_data->inputs_count[0] != task_data->outputs_count[0]) {
+    if (task_data->inputs.empty() || task_data->outputs.empty() || task_data->inputs[0] == nullptr ||
+        task_data->outputs[0] == nullptr || task_data->inputs_count.empty() || task_data->outputs_count.empty() ||
+        task_data->inputs_count[0] != task_data->outputs_count[0]) {
       return false;
     }
   }
-
   return true;
 }
 
 bool TestTaskALL::RunImpl() {
-  int rank = 0;
-  int size = 1;
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-  if (input_.empty()) {
-    return true;
-  }
-
-  if (rank == 0) {
-    auto arr_size = input_.size();
-    QuickSort(input_, 0, static_cast<int>(arr_size) - 1);
-    Merge(input_, 0, static_cast<int>(arr_size / 2) - 1, static_cast<int>(arr_size) - 1);
-    output_ = input_;
-  }
-
+  DistributeData();
+  ParallelQuickSort(local_data_);
+  GatherAndMergeResults();
   return true;
 }
 
@@ -149,13 +143,9 @@ bool TestTaskALL::PostProcessingImpl() {
     if (output_.empty() || task_data->outputs[0] == nullptr) {
       return false;
     }
-
     auto* out_ptr = reinterpret_cast<int*>(task_data->outputs[0]);
-    for (size_t i = 0; i < output_.size(); i++) {
-      out_ptr[i] = output_[i];
-    }
+    std::copy(output_.begin(), output_.end(), out_ptr);
   }
-
   return true;
 }
 

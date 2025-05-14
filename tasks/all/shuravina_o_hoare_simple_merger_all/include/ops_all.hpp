@@ -21,9 +21,13 @@ class TestTaskALL : public ppc::core::Task {
  private:
   std::vector<int> input_;
   std::vector<int> output_;
+  std::vector<int> local_data_;
 
   void QuickSort(std::vector<int>& arr, int low, int high);
   static void Merge(std::vector<int>& arr, int low, int mid, int high);
+  void ParallelQuickSort(std::vector<int>& arr);
+  void DistributeData();
+  void GatherAndMergeResults();
 };
 
 }  // namespace shuravina_o_hoare_simple_merger
