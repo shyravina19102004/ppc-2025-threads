@@ -1,7 +1,6 @@
 #ifndef OPS_ALL_HPP
 #define OPS_ALL_HPP
 
-#include <algorithm>
 #include <memory>
 #include <utility>
 #include <vector>

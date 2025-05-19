@@ -3,7 +3,9 @@
 #include <mpi.h>
 #include <omp.h>
 
-#include <utility>
+#include <algorithm>
+#include <cstddef>
+#include <iterator>
 
 namespace shuravina_o_hoare_simple_merger {
 
@@ -72,17 +74,17 @@ void TestTaskALL::DistributeData() {
   MPI_Comm_size(MPI_COMM_WORLD, &size);
 
   if (rank == 0) {
-    size_t chunk_size = input_.size() / size;
+    std::size_t chunk_size = input_.size() / size;
     for (int i = 1; i < size; ++i) {
-      size_t start = i * chunk_size;
-      size_t end = (i == size - 1) ? input_.size() : (i + 1) * chunk_size;
-      size_t count = end - start;
+      std::size_t start = i * chunk_size;
+      std::size_t end = (i == size - 1) ? input_.size() : (i + 1) * chunk_size;
+      std::size_t count = end - start;
       MPI_Send(&count, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD);
       MPI_Send(input_.data() + start, static_cast<int>(count), MPI_INT, i, 0, MPI_COMM_WORLD);
     }
-    local_data_ = std::vector<int>(input_.begin(), input_.begin() + static_cast<long>(chunk_size));
+    local_data_ = std::vector<int>(input_.begin(), input_.begin() + static_cast<std::ptrdiff_t>(chunk_size));
   } else {
-    size_t count = 0;
+    std::size_t count = 0;
     MPI_Recv(&count, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     local_data_.resize(count);
     MPI_Recv(local_data_.data(), static_cast<int>(count), MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -99,17 +101,17 @@ void TestTaskALL::GatherAndMergeResults() {
     output_ = local_data_;
     std::vector<int> temp;
     for (int i = 1; i < size; ++i) {
-      size_t count = 0;
+      std::size_t count = 0;
       MPI_Recv(&count, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       temp.resize(count);
       MPI_Recv(temp.data(), static_cast<int>(count), MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
       std::vector<int> merged(output_.size() + temp.size());
-      std::ranges::merge(output_, temp, merged.begin());
+      std::merge(output_.begin(), output_.end(), temp.begin(), temp.end(), merged.begin());
       output_ = std::move(merged);
     }
   } else {
-    size_t count = local_data_.size();
+    std::size_t count = local_data_.size();
     MPI_Send(&count, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
     MPI_Send(local_data_.data(), static_cast<int>(count), MPI_INT, 0, 0, MPI_COMM_WORLD);
   }
@@ -159,7 +161,7 @@ bool TestTaskALL::PostProcessingImpl() {
       return false;
     }
     auto* out_ptr = reinterpret_cast<int*>(task_data->outputs[0]);
-    std::ranges::copy(output_, out_ptr);
+    std::copy(output_.begin(), output_.end(), out_ptr);
   }
   return true;
 }
