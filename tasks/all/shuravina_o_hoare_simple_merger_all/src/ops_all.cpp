@@ -3,6 +3,7 @@
 #include <mpi.h>
 #include <omp.h>
 
+#include <algorithm>
 #include <cstddef>
 #include <utility>
 
@@ -73,17 +74,17 @@ void TestTaskALL::DistributeData() {
   MPI_Comm_size(MPI_COMM_WORLD, &size);
 
   if (rank == 0) {
-    size_t chunk_size = input_.size() / size;
+    std::size_t chunk_size = input_.size() / size;
     for (int i = 1; i < size; ++i) {
-      size_t start = i * chunk_size;
-      size_t end = (i == size - 1) ? input_.size() : (i + 1) * chunk_size;
-      size_t count = end - start;
+      std::size_t start = i * chunk_size;
+      std::size_t end = (i == size - 1) ? input_.size() : (i + 1) * chunk_size;
+      std::size_t count = end - start;
       MPI_Send(&count, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD);
       MPI_Send(input_.data() + start, static_cast<int>(count), MPI_INT, i, 0, MPI_COMM_WORLD);
     }
-    local_data_ = std::vector<int>(input_.begin(), input_.begin() + static_cast<ptrdiff_t>(chunk_size));
+    local_data_ = std::vector<int>(input_.begin(), input_.begin() + static_cast<std::ptrdiff_t>(chunk_size));
   } else {
-    size_t count = 0;
+    std::size_t count = 0;
     MPI_Recv(&count, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     local_data_.resize(count);
     MPI_Recv(local_data_.data(), static_cast<int>(count), MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -100,7 +101,7 @@ void TestTaskALL::GatherAndMergeResults() {
     output_ = local_data_;
     std::vector<int> temp;
     for (int i = 1; i < size; ++i) {
-      size_t count = 0;
+      std::size_t count = 0;
       MPI_Recv(&count, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       temp.resize(count);
       MPI_Recv(temp.data(), static_cast<int>(count), MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -110,7 +111,7 @@ void TestTaskALL::GatherAndMergeResults() {
       output_ = std::move(merged);
     }
   } else {
-    size_t count = local_data_.size();
+    std::size_t count = local_data_.size();
     MPI_Send(&count, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
     MPI_Send(local_data_.data(), static_cast<int>(count), MPI_INT, 0, 0, MPI_COMM_WORLD);
   }
