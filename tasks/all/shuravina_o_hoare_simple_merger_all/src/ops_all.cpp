@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <vector>
 
 namespace shuravina_o_hoare_simple_merger {
 
@@ -106,7 +107,7 @@ void TestTaskALL::GatherAndMergeResults() {
       MPI_Recv(temp.data(), static_cast<int>(count), MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
       std::vector<int> merged(output_.size() + temp.size());
-      std::merge(output_.begin(), output_.end(), temp.begin(), temp.end(), merged.begin());
+      std::ranges::merge(output_, temp, merged.begin());
       output_ = std::move(merged);
     }
   } else {
@@ -160,7 +161,7 @@ bool TestTaskALL::PostProcessingImpl() {
       return false;
     }
     auto* out_ptr = reinterpret_cast<int*>(task_data->outputs[0]);
-    std::copy(output_.begin(), output_.end(), out_ptr);
+    std::ranges::copy(output_, out_ptr);
   }
   return true;
 }
