@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <utility>
 #include <vector>
 
 namespace shuravina_o_hoare_simple_merger {
