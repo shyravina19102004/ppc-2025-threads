@@ -11,8 +11,7 @@ namespace shuravina_o_hoare_simple_merger {
 
 class TestTaskALL : public ppc::core::Task {
  public:
-  explicit TestTaskALL(std::shared_ptr<ppc::core::TaskData> task_data) : Task(std::move(task_data)) {}
-
+  explicit TestTaskALL(std::shared_ptr<ppc::core::TaskData> task_data);
   bool PreProcessingImpl() override;
   bool ValidationImpl() override;
   bool RunImpl() override;
@@ -32,4 +31,4 @@ class TestTaskALL : public ppc::core::Task {
 
 }  // namespace shuravina_o_hoare_simple_merger
 
-#endif  // OPS_ALL_HPP
+#endif
