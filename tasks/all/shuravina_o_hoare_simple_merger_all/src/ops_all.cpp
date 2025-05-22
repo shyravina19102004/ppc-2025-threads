@@ -5,8 +5,11 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <memory>
 #include <utility>
 #include <vector>
+
+#include "core/task/include/task.hpp"
 
 namespace shuravina_o_hoare_simple_merger {
 
