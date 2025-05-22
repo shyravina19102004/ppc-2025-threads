@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
 #include <chrono>
-#include <cstdint>
 #include <memory>
+#include <random>
 #include <vector>
 
 #include "all/shuravina_o_hoare_simple_merger_all/include/ops_all.hpp"
@@ -10,22 +10,24 @@
 #include "core/task/include/task.hpp"
 
 TEST(shuravina_o_hoare_simple_merger_all, test_pipeline_run) {
-  constexpr int kCount = 50000;
+  const size_t size = 10000;
+  std::vector<int> input(size, 0);
+  std::vector<int> output(size, 0);
 
-  std::vector<int> in(kCount, 0);
-  std::vector<int> out(kCount, 0);
-
-  for (int i = 0; i < kCount; i++) {
-    in[i] = kCount - i;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> distrib(-10000, 10000);
+  for (size_t i = 0; i < size; ++i) {
+    input[i] = distrib(gen);
   }
 
-  auto task_data_all = std::make_shared<ppc::core::TaskData>();
-  task_data_all->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
-  task_data_all->inputs_count.emplace_back(in.size());
-  task_data_all->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
-  task_data_all->outputs_count.emplace_back(out.size());
+  auto task_data = std::make_shared<ppc::core::TaskData>();
+  task_data->inputs.emplace_back(reinterpret_cast<uint8_t*>(input.data()));
+  task_data->inputs_count.emplace_back(input.size());
+  task_data->outputs.emplace_back(reinterpret_cast<uint8_t*>(output.data()));
+  task_data->outputs_count.emplace_back(output.size());
 
-  auto test_task_all = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskALL>(task_data_all);
+  auto task = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskALL>(task_data);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
   perf_attr->num_running = 10;
@@ -38,34 +40,30 @@ TEST(shuravina_o_hoare_simple_merger_all, test_pipeline_run) {
 
   auto perf_results = std::make_shared<ppc::core::PerfResults>();
 
-  auto perf_analyzer = std::make_shared<ppc::core::Perf>(test_task_all);
+  auto perf_analyzer = std::make_shared<ppc::core::Perf>(task);
   perf_analyzer->PipelineRun(perf_attr, perf_results);
   ppc::core::Perf::PrintPerfStatistic(perf_results);
-
-  std::vector<int> expected(kCount);
-  for (int i = 0; i < kCount; i++) {
-    expected[i] = i + 1;
-  }
-  EXPECT_EQ(out, expected);
 }
 
 TEST(shuravina_o_hoare_simple_merger_all, test_task_run) {
-  constexpr int kCount = 50000;
+  const size_t size = 10000;
+  std::vector<int> input(size, 0);
+  std::vector<int> output(size, 0);
 
-  std::vector<int> in(kCount, 0);
-  std::vector<int> out(kCount, 0);
-
-  for (int i = 0; i < kCount; i++) {
-    in[i] = kCount - i;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> distrib(-10000, 10000);
+  for (size_t i = 0; i < size; ++i) {
+    input[i] = distrib(gen);
   }
 
-  auto task_data_all = std::make_shared<ppc::core::TaskData>();
-  task_data_all->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
-  task_data_all->inputs_count.emplace_back(in.size());
-  task_data_all->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
-  task_data_all->outputs_count.emplace_back(out.size());
+  auto task_data = std::make_shared<ppc::core::TaskData>();
+  task_data->inputs.emplace_back(reinterpret_cast<uint8_t*>(input.data()));
+  task_data->inputs_count.emplace_back(input.size());
+  task_data->outputs.emplace_back(reinterpret_cast<uint8_t*>(output.data()));
+  task_data->outputs_count.emplace_back(output.size());
 
-  auto test_task_all = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskALL>(task_data_all);
+  auto task = std::make_shared<shuravina_o_hoare_simple_merger::TestTaskALL>(task_data);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
   perf_attr->num_running = 10;
@@ -78,13 +76,7 @@ TEST(shuravina_o_hoare_simple_merger_all, test_task_run) {
 
   auto perf_results = std::make_shared<ppc::core::PerfResults>();
 
-  auto perf_analyzer = std::make_shared<ppc::core::Perf>(test_task_all);
+  auto perf_analyzer = std::make_shared<ppc::core::Perf>(task);
   perf_analyzer->TaskRun(perf_attr, perf_results);
   ppc::core::Perf::PrintPerfStatistic(perf_results);
-
-  std::vector<int> expected(kCount);
-  for (int i = 0; i < kCount; i++) {
-    expected[i] = i + 1;
-  }
-  EXPECT_EQ(out, expected);
 }

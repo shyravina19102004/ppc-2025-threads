@@ -1,6 +1,9 @@
 #ifndef OPS_ALL_HPP
 #define OPS_ALL_HPP
 
+#include <mpi.h>
+#include <omp.h>
+
 #include <memory>
 #include <vector>
 
@@ -11,8 +14,8 @@ namespace shuravina_o_hoare_simple_merger {
 class TestTaskALL : public ppc::core::Task {
  public:
   explicit TestTaskALL(std::shared_ptr<ppc::core::TaskData> task_data);
-  bool PreProcessingImpl() override;
   bool ValidationImpl() override;
+  bool PreProcessingImpl() override;
   bool RunImpl() override;
   bool PostProcessingImpl() override;
 
