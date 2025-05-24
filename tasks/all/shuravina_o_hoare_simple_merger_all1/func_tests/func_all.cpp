@@ -6,6 +6,7 @@
 #include <memory>
 #include <random>
 #include <vector>
+#include <mpi.h>
 
 #include "all/shuravina_o_hoare_simple_merger_all1/include/ops_all.hpp"
 #include "core/task/include/task.hpp"
