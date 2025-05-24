@@ -54,6 +54,12 @@ void RunTestWithMPI(const std::vector<int>& input, std::vector<int>& output) {
 
 }  // namespace
 
+int main(int argc, char** argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  ::testing::AddGlobalTestEnvironment(new MPITestEnvironment);
+  return RUN_ALL_TESTS();
+}
+
 TEST(shuravina_o_hoare_simple_merger_all, test_random_array) {
   const size_t size = 1000;
   std::vector<int> input = GenerateRandomVector(size);
@@ -108,6 +114,7 @@ TEST(shuravina_o_hoare_simple_merger_all, test_single_element_array) {
     EXPECT_EQ(input, output);
   }
 }
+
 TEST(shuravina_o_hoare_simple_merger_all, test_empty_array_validation) {
   std::vector<int> input;
   std::vector<int> output;
