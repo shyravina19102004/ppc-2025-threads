@@ -6,7 +6,6 @@
 #include <memory>
 #include <random>
 #include <vector>
-#include <mpi.h>
 
 #include "all/shuravina_o_hoare_simple_merger_all1/include/ops_all.hpp"
 #include "core/task/include/task.hpp"
@@ -53,12 +52,6 @@ void RunTestWithMPI(const std::vector<int>& input, std::vector<int>& output) {
 }
 
 }  // namespace
-
-int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  ::testing::AddGlobalTestEnvironment(new MPITestEnvironment);
-  return RUN_ALL_TESTS();
-}
 
 TEST(shuravina_o_hoare_simple_merger_all, test_random_array) {
   const size_t size = 1000;
