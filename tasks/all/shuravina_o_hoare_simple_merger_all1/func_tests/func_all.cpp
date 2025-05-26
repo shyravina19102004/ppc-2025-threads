@@ -119,12 +119,7 @@ TEST(shuravina_o_hoare_simple_merger_all, test_empty_array_validation) {
   task_data->outputs_count.emplace_back(0);
 
   shuravina_o_hoare_simple_merger::TestTaskALL task(task_data);
-
-  int rank = 0;
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  if (rank == 0) {
-    EXPECT_FALSE(task.Validation());
-  }
+  EXPECT_FALSE(task.Validation());
 }
 
 TEST(shuravina_o_hoare_simple_merger_all, test_different_sizes_validation) {
