@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "core/task/include/task.hpp"
-#include "seq/vershinina_a_hoare_sort_seq/include/ops_seq.hpp"
+#include "seq/vershinina_a_hoare_sort/include/ops_seq.hpp"
 
 namespace {
 std::vector<int> GetRandomVector(int len) {
@@ -133,7 +133,6 @@ TEST(vershinina_a_hoare_sort_seq, Test_len_100) {
   test_task_sequential.PostProcessing();
   ASSERT_TRUE(std::ranges::is_sorted(out));
 }
-
 TEST(vershinina_a_hoare_sort_seq, Test_len_200) {
   std::vector<int> in;
   std::vector<int> out(200);
