@@ -1,4 +1,4 @@
-#include "seq/mezhuev_m_bitwise_integer_sort_with_simple_merge_seq/include/ops_seq.hpp"
+#include "seq/mezhuev_m_bitwise_integer_sort_with_simple_merge/include/ops_seq.hpp"
 
 #include <algorithm>
 #include <cstddef>
