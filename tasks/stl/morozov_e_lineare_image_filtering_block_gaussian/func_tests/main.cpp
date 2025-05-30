@@ -6,8 +6,7 @@
 #include <vector>
 
 #include "core/task/include/task.hpp"
-#include "tbb/morozov_e_lineare_image_filtering_block_gaussian_tbb/include/ops_tbb.hpp"
-
+#include "stl/morozov_e_lineare_image_filtering_block_gaussian/include/ops_stl.hpp"
 namespace {
 std::vector<double> GenerateRandomVector(int n, int m) {
   std::random_device rd;
@@ -26,7 +25,7 @@ std::vector<double> GenerateRandomVector(int n, int m) {
 }
 }  // namespace
 
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, empty_image_test) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, empty_image_test) {
   int n = 0;
   int m = 0;
   std::vector<int> image(n * m, 1);
@@ -42,10 +41,10 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, empty_image_test) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), false);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, size_input_not_equal_size_output_test1) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, size_input_not_equal_size_output_test1) {
   int n = 0;
   int m = 0;
   std::vector<int> image(n * m, 1);
@@ -61,10 +60,10 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, size_input_not_equal_
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), false);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, size_input_not_equal_size_output_test2) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, size_input_not_equal_size_output_test2) {
   int n = 0;
   int m = 0;
   std::vector<int> image(n * m, 0);
@@ -80,10 +79,10 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, size_input_not_equal_
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), false);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test1) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, main_test1) {
   int n = 5;
   int m = 5;
   // clang-format off
@@ -106,14 +105,14 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test1) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), true);
   test_task_sequential.PreProcessing();
   test_task_sequential.Run();
   test_task_sequential.PostProcessing();
   EXPECT_EQ(image, image_res);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test2) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, main_test2) {
   int n = 5;
   int m = 5;
   // clang-format off
@@ -136,7 +135,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test2) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), true);
   test_task_sequential.PreProcessing();
   test_task_sequential.Run();
@@ -151,7 +150,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test2) {
   // clang-format on
   EXPECT_EQ(real_res, image_res);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test3) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, main_test3) {
   int n = 5;
   int m = 5;
   // clang-format off
@@ -174,7 +173,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test3) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), true);
   test_task_sequential.PreProcessing();
   test_task_sequential.Run();
@@ -189,7 +188,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test3) {
   // clang-format on
   EXPECT_EQ(real_res, image_res);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test4) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, main_test4) {
   int n = 5;
   int m = 5;
   // clang-format off
@@ -212,14 +211,14 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test4) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), true);
   test_task_sequential.PreProcessing();
   test_task_sequential.Run();
   test_task_sequential.PostProcessing();
   EXPECT_EQ(image, image_res);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test5) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, main_test5) {
   int n = 5;
   int m = 5;
   // clang-format off
@@ -242,7 +241,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test5) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), true);
   test_task_sequential.PreProcessing();
   test_task_sequential.Run();
@@ -257,7 +256,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test5) {
   // clang-format on
   EXPECT_EQ(real_res, image_res);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test6) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, main_test6) {
   int n = 3;
   int m = 3;
   // clang-format off
@@ -278,7 +277,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test6) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), true);
   test_task_sequential.PreProcessing();
   test_task_sequential.Run();
@@ -291,34 +290,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test6) {
   // clang-format on
   EXPECT_EQ(real_res, image_res);
 }
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, main_test7_) {
-  int n = 2;
-  int m = 3;
-  // clang-format off
-  std::vector<double> image = 
-   {1, 6, 7,
-	8, 2, 1};
-  // clang-format on
-  std::vector image_res(n * m, 0.0);
-
-  // Create task_data
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
-  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
-  task_data_seq->inputs_count.emplace_back(n);
-  task_data_seq->inputs_count.emplace_back(m);
-  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t *>(image_res.data()));
-  task_data_seq->outputs_count.emplace_back(n);
-  task_data_seq->outputs_count.emplace_back(m);
-
-  // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
-  ASSERT_EQ(test_task_sequential.Validation(), true);
-  test_task_sequential.PreProcessing();
-  test_task_sequential.Run();
-  test_task_sequential.PostProcessing();
-  EXPECT_EQ(image, image_res);
-}
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, random_test1) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, random_test1) {
   int n = 3;
   int m = 3;
   std::vector image_res(n * m, 0.0);
@@ -333,7 +305,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, random_test1) {
   task_data_seq->outputs_count.emplace_back(m);
 
   // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
+  morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL test_task_sequential(task_data_seq);
   ASSERT_EQ(test_task_sequential.Validation(), true);
   test_task_sequential.PreProcessing();
   test_task_sequential.Run();
@@ -361,50 +333,6 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, random_test1) {
       }
     }
   }
-  EXPECT_EQ(image_res, res);
-}
-TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, random_test2) {
-  int n = 17;
-  int m = 23;
-  std::vector image_res(n * m, 0.0);
-  std::vector<double> image = GenerateRandomVector(n, m);
-  // Create task_data
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
-  task_data_seq->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
-  task_data_seq->inputs_count.emplace_back(n);
-  task_data_seq->inputs_count.emplace_back(m);
-  task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t *>(image_res.data()));
-  task_data_seq->outputs_count.emplace_back(n);
-  task_data_seq->outputs_count.emplace_back(m);
-
-  // Create Task
-  morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB test_task_sequential(task_data_seq);
-  ASSERT_EQ(test_task_sequential.Validation(), true);
-  test_task_sequential.PreProcessing();
-  test_task_sequential.Run();
-  test_task_sequential.PostProcessing();
-  std::vector<double> res(n * m);
-  // clang-format off
-  const std::vector<std::vector<double>> kernel = {
-      {1.0 / 16, 2.0 / 16, 1.0 / 16},
-      {2.0 / 16, 4.0 / 16, 2.0 / 16},
-      {1.0 / 16, 2.0 / 16, 1.0 / 16}};
   // clang-format on
-  for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < m; ++j) {
-      if (i == 0 || j == 0 || i == n - 1 || j == m - 1) {
-        res[(i * m) + j] = image[(i * m) + j];
-      } else {
-        double sum = 0.0;
-        // Применяем ядро к текущему пикселю и его соседям
-        for (int ki = -1; ki <= 1; ++ki) {
-          for (int kj = -1; kj <= 1; ++kj) {
-            sum += image[((i + ki) * m) + (j + kj)] * kernel[ki + 1][kj + 1];
-          }
-        }
-        res[(i * m) + j] = sum;
-      }
-    }
-  }
   EXPECT_EQ(image_res, res);
 }

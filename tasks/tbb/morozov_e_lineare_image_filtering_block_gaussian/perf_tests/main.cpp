@@ -8,9 +8,9 @@
 
 #include "core/perf/include/perf.hpp"
 #include "core/task/include/task.hpp"
-#include "stl/morozov_e_lineare_image_filtering_block_gaussian_stl/include/ops_stl.hpp"
+#include "tbb/morozov_e_lineare_image_filtering_block_gaussian/include/ops_tbb.hpp"
 
-TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, test_pipeline_run) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, test_pipeline_run12) {
   int n = 4000;
   int m = 4000;
   std::vector<double> image(n * m, 1.0);
@@ -37,7 +37,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, test_pipeline_run) {
 
   // Create Task
   auto test_task_sequential =
-      std::make_shared<morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL>(task_data_seq);
+      std::make_shared<morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB>(task_data_seq);
 
   // Create Perf attributes
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
@@ -59,7 +59,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, test_pipeline_run) {
   ASSERT_EQ(image_res, real_res);
 }
 
-TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, test_task_run) {
+TEST(morozov_e_lineare_image_filtering_block_gaussian_tbb, test_task_run) {
   int n = 4000;
   int m = 4000;
   std::vector<double> image(n * m, 1.0);
@@ -86,7 +86,7 @@ TEST(morozov_e_lineare_image_filtering_block_gaussian_stl, test_task_run) {
 
   // Create Task
   auto test_task_sequential =
-      std::make_shared<morozov_e_lineare_image_filtering_block_gaussian_stl::TestTaskSTL>(task_data_seq);
+      std::make_shared<morozov_e_lineare_image_filtering_block_gaussian_tbb::TestTaskTBB>(task_data_seq);
 
   // Create Perf attributes
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
