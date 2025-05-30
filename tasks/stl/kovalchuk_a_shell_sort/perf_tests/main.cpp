@@ -8,24 +8,23 @@
 
 #include "core/perf/include/perf.hpp"
 #include "core/task/include/task.hpp"
-#include "omp/kovalchuk_a_shell_sort_omp/include/ops_omp.hpp"
+#include "stl/kovalchuk_a_shell_sort/include/ops_stl.hpp"
 
-TEST(kovalchuk_a_shell_sort_omp, test_pipeline_run) {
+TEST(kovalchuk_a_shell_sort_tbb, test_pipeline_run) {
   constexpr int kCount = 1000000;
 
   std::vector<int> in(kCount);
-  for (int i = 0; i < kCount; ++i) {
-    in[i] = kCount / 2 - i;
-  }
+  std::ranges::generate(in, [n = kCount / 2]() mutable { return n--; });
+
   std::vector<int> out(kCount);
 
-  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
-  task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
-  task_data_omp->inputs_count.emplace_back(in.size());
-  task_data_omp->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
-  task_data_omp->outputs_count.emplace_back(out.size());
+  auto task_data_tbb = std::make_shared<ppc::core::TaskData>();
+  task_data_tbb->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
+  task_data_tbb->inputs_count.emplace_back(in.size());
+  task_data_tbb->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
+  task_data_tbb->outputs_count.emplace_back(out.size());
 
-  auto test_task = std::make_shared<kovalchuk_a_shell_sort_omp::ShellSortOMP>(task_data_omp);
+  auto test_task = std::make_shared<kovalchuk_a_shell_sort_stl::ShellSortSTL>(task_data_tbb);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
   perf_attr->num_running = 10;
@@ -44,22 +43,21 @@ TEST(kovalchuk_a_shell_sort_omp, test_pipeline_run) {
   ASSERT_TRUE(std::ranges::is_sorted(out));
 }
 
-TEST(kovalchuk_a_shell_sort_omp, test_task_run) {
+TEST(kovalchuk_a_shell_sort_tbb, test_task_run) {
   constexpr int kCount = 1000000;
 
   std::vector<int> in(kCount);
-  for (int i = 0; i < kCount; ++i) {
-    in[i] = kCount / 2 - i;
-  }
+  std::ranges::generate(in, [n = kCount / 2]() mutable { return n--; });
+
   std::vector<int> out(kCount);
 
-  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
-  task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
-  task_data_omp->inputs_count.emplace_back(in.size());
-  task_data_omp->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
-  task_data_omp->outputs_count.emplace_back(out.size());
+  auto task_data_tbb = std::make_shared<ppc::core::TaskData>();
+  task_data_tbb->inputs.emplace_back(reinterpret_cast<uint8_t*>(in.data()));
+  task_data_tbb->inputs_count.emplace_back(in.size());
+  task_data_tbb->outputs.emplace_back(reinterpret_cast<uint8_t*>(out.data()));
+  task_data_tbb->outputs_count.emplace_back(out.size());
 
-  auto test_task = std::make_shared<kovalchuk_a_shell_sort_omp::ShellSortOMP>(task_data_omp);
+  auto test_task = std::make_shared<kovalchuk_a_shell_sort_stl::ShellSortSTL>(task_data_tbb);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
   perf_attr->num_running = 10;
