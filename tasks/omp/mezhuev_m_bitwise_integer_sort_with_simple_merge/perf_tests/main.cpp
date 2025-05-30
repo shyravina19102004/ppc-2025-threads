@@ -11,7 +11,7 @@
 
 #include "core/perf/include/perf.hpp"
 #include "core/task/include/task.hpp"
-#include "omp/mezhuev_m_bitwise_integer_sort_with_simple_merge_omp/include/ops_omp.hpp"
+#include "omp/mezhuev_m_bitwise_integer_sort_with_simple_merge/include/ops_omp.hpp"
 
 TEST(mezhuev_m_bitwise_integer_sort_with_simple_merge_omp, test_pipeline_run) {
   constexpr int kCount = 1500 * 1500;

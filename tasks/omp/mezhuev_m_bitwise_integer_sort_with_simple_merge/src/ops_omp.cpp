@@ -1,4 +1,4 @@
-#include "omp/mezhuev_m_bitwise_integer_sort_with_simple_merge_omp/include/ops_omp.hpp"
+#include "omp/mezhuev_m_bitwise_integer_sort_with_simple_merge/include/ops_omp.hpp"
 
 #include <algorithm>
 #include <cmath>
