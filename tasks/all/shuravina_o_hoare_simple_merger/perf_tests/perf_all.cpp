@@ -7,12 +7,12 @@
 #include <random>
 #include <vector>
 
-#include "all/shuravina_o_hoare_simple_merger_all1/include/ops_all.hpp"
+#include "all/shuravina_o_hoare_simple_merger/include/ops_all.hpp"
 #include "core/perf/include/perf.hpp"
 #include "core/task/include/task.hpp"
 
 TEST(shuravina_o_hoare_simple_merger_all, test_pipeline_run) {
-  const std::size_t size = 1000000;
+  const std::size_t size = 10000;
   std::vector<int> input(size, 0);
   std::vector<int> output(size, 0);
 
@@ -48,7 +48,7 @@ TEST(shuravina_o_hoare_simple_merger_all, test_pipeline_run) {
 }
 
 TEST(shuravina_o_hoare_simple_merger_all, test_task_run) {
-  const std::size_t size = 1000000;
+  const std::size_t size = 10000000;
   std::vector<int> input(size, 0);
   std::vector<int> output(size, 0);
 
