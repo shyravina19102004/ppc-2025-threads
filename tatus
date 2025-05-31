@@ -1,0 +1,109 @@
+*   [33m4eb9d24[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mshuravina_o_hoare_simple_merger_all1[m[33m, [m[1;31morigin/shuravina_o_hoare_simple_merger_all1[m[33m)[m Merge branch 'shuravina_o_hoare_simple_merger_all1' of https://github.com/shyravina19102004/ppc-2025-threads into shuravina_o_hoare_simple_merger_all1
+[31m|[m[32m\[m  
+[31m|[m * [33m03138d5[m testperf2
+[31m|[m * [33m659e885[m testperf1
+[31m|[m *   [33mb2ecec4[m Merge branch 'shuravina_o_hoare_simple_merger_all1' of https://github.com/shyravina19102004/ppc-2025-threads into shuravina_o_hoare_simple_merger_all1
+[31m|[m [33m|[m[34m\[m  
+[31m|[m [33m|[m *   [33me7f233e[m Merge branch 'master' into shuravina_o_hoare_simple_merger_all1
+[31m|[m [33m|[m [35m|[m[36m\[m  
+[31m|[m * [35m|[m [36m|[m [33m58e9b63[m testperf1
+[31m|[m [35m|[m[35m/[m [36m/[m  
+[31m|[m * [36m|[m [33m89e29d3[m testperf
+[31m|[m * [36m|[m   [33mc4f0d09[m Merge branch 'shuravina_o_hoare_simple_merger_all1' of https://github.com/shyravina19102004/ppc-2025-threads into shuravina_o_hoare_simple_merger_all1
+[31m|[m [1;31m|[m[1;32m\[m [36m\[m  
+[31m|[m [1;31m|[m * [36m\[m   [33mf92c52b[m Merge branch 'master' into shuravina_o_hoare_simple_merger_all1
+[31m|[m [1;31m|[m [1;33m|[m[1;34m\[m [36m\[m  
+[31m|[m * [1;33m|[m [1;34m|[m [36m|[m [33m44a775a[m testperf
+[31m|[m [1;33m|[m[1;33m/[m [1;34m/[m [36m/[m  
+[31m|[m * [1;34m|[m [36m|[m [33m96cc447[m test
+[31m|[m * [1;34m|[m [36m|[m [33me5ccb43[m rank
+[31m|[m * [1;34m|[m [36m|[m [33mfbd7fca[m с
+[31m|[m * [1;34m|[m [36m|[m [33me0ac1a9[m b
+[31m|[m * [1;34m|[m [36m|[m [33m92a1ebe[m a
+[31m|[m * [1;34m|[m [36m|[m [33m7e0be2d[m deletemain
+[31m|[m * [1;34m|[m [36m|[m [33m3403d44[m clang
+[31m|[m * [1;34m|[m [36m|[m [33mf08662d[m 7
+[31m|[m * [1;34m|[m [36m|[m [33m82e0111[m 6
+[31m|[m * [1;34m|[m [36m|[m [33m145dfd9[m 5
+[31m|[m * [1;34m|[m [36m|[m   [33m64681ec[m Merge branch 'shuravina_o_hoare_simple_merger_all1' of https://github.com/shyravina19102004/ppc-2025-threads into shuravina_o_hoare_simple_merger_all1
+[31m|[m [1;35m|[m[1;36m\[m [1;34m\[m [36m\[m  
+[31m|[m [1;35m|[m * [1;34m\[m [36m\[m   [33mafb39a3[m Merge branch 'master' into shuravina_o_hoare_simple_merger_all1
+[31m|[m [1;35m|[m [31m|[m[32m\[m [1;34m\[m [36m\[m  
+[31m|[m * [31m|[m [32m|[m [1;34m|[m [36m|[m [33m0e497e4[m 5
+[31m|[m [31m|[m[31m/[m [32m/[m [1;34m/[m [36m/[m  
+[31m|[m * [32m|[m [1;34m|[m [36m|[m [33me1b70b1[m 4
+[31m|[m * [32m|[m [1;34m|[m [36m|[m [33m05e29a3[m 3
+[31m|[m * [32m|[m [1;34m|[m [36m|[m [33mecbf53e[m 2
+[31m|[m * [32m|[m [1;34m|[m [36m|[m [33mc07d9fc[m 1
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33m29fca53[m m1
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33me7f96f6[m testperf2
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33m55b0452[m testperf1
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33mad34ff7[m testperf
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33mf16930c[m testperf
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33m4e49384[m rank
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33m1db8367[m с
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33m1cdef83[m b
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33m20dfb1c[m a
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33me34cf78[m 7
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33mbba65d9[m 6
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33mb05e252[m 5
+* [32m|[m [32m|[m [1;34m|[m [36m|[m [33m0456d66[m 4
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m9103c54[m[33m ([m[1;31morigin/shuravina_o_hoare_simple_merger_omp1[m[33m, [m[1;32mshuravina_o_hoare_simple_merger_omp1[m[33m)[m m4
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m30abd81[m d
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33ma81d09d[m c
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33me5af49f[m b
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mb656c0a[m a
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33me4cd9c0[m 11
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m2181a4c[m 10
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33md359a03[m 9
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m9f7b3fe[m 8
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m53b0639[m 7
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m4aa1fb3[m 6
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m39f11a0[m 5
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m8f03f23[m 4
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m65921d8[m 3
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m03e80b6[m 2
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m35d790a[m 1
+[32m|[m [32m|[m[32m_[m[32m|[m[32m_[m[1;34m|[m[32m_[m[36m|[m[32m/[m  
+[32m|[m[32m/[m[32m|[m [32m|[m [1;34m|[m [36m|[m   
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33macf9276[m[33m ([m[1;31morigin/shuravina_o_hoare_simple_merger_tbb[m[33m, [m[1;32mshuravina_o_hoare_simple_merger_tbb[m[33m)[m m3
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m08af6b0[m repeat
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m92c2e07[m repeat
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m02877ef[m time
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m9e72c6c[m tests
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33me3bc5dc[m 26
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mc1b6f40[m 25
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mb47b51e[m 24
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m190bb2b[m 23
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mfa56fea[m 22
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m89810fb[m 21
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mb2d7f7c[m 20
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33ma9aaa22[m 19
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mb290653[m 18
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m493d01b[m 18
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33md99d45a[m 17
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m388fdbb[m 16
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m2b90e1e[m 15
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mef11ae2[m 14
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m4f8dad5[m 13
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m9d1c3ae[m 12
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m2e3873d[m 10
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m0900a71[m 9
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mff73ba1[m 8
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m372fc38[m 7
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m0142ca8[m 6
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m4650168[m 5
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mcf37d64[m 4
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m9fd4217[m 3
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m740be8b[m 2
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m3b16cf4[m 2
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m4a87829[m 1
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m06e4953[m 06
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m0a0e374[m 05
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m2b28f06[m 04
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33mb9af8cb[m 03
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m88df4ca[m 02
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m2267ae3[m 01
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m7f014a8[m 7
+[32m|[m [32m|[m [32m|[m [1;34m|[m [36m|[m * [33m241609b[m 6
+[32m|[m [32m|[m [32m|[m [1
