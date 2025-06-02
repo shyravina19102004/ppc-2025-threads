@@ -29,4 +29,4 @@ class TestTaskSTL : public ppc::core::Task {
   bool PostProcessingImpl() override;
 };
 
-}  // namespace shuravina_o_hoare_simple_merger_stl
+}  // namespace shuravina_o_hoare_simple_merger
