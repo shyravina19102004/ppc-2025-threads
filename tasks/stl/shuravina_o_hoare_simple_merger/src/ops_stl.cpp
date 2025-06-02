@@ -10,7 +10,7 @@
 
 #include "core/task/include/task.hpp"
 
-namespace shuravina_o_hoare_simple_merger_stl {
+namespace shuravina_o_hoare_simple_merger {
 
 TestTaskSTL::TestTaskSTL(std::shared_ptr<ppc::core::TaskData> task_data) : Task(std::move(task_data)) {}
 
@@ -135,4 +135,4 @@ bool TestTaskSTL::PostProcessingImpl() {
   return true;
 }
 
-}  // namespace shuravina_o_hoare_simple_merger_stl
+}  // namespace shuravina_o_hoare_simple_merger
